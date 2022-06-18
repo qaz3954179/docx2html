@@ -12,8 +12,10 @@ export default class FieldBegin extends Converter{
 	
 	static factory(wordField, parent){
 		try{
-			var Model=require('./factory')[wordField.type]
-			return new Model(wordField, parent)
+			var Model=require('./factory')[wordField.type];
+			if (Model) {
+				return new Model(wordField, parent)
+			}
 		}catch(e){
 		}
 	}
