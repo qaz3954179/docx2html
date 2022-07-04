@@ -8,6 +8,7 @@ export default class List extends Paragraph{
 		
 		var makeStructure=function(parent){
 			ul=this.doc.createElement('ul')
+			if (!listStyle) return;
 			ul.id=listStyle.id
 			ul.setAttribute('level',level)
 			this.constructor.addClass(ul,listStyle.getParentStyle().id)
