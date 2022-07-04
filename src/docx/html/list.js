@@ -4,6 +4,7 @@ export default class List extends Paragraph{
 	convert(){
 		var elParent=this.parent.content, ul=elParent.lastElementChild;
 		var listStyle=this.wordModel.getNumberingStyle()
+		if (!listStyle) return;
 		var numId=listStyle.id, level=this.wordModel.getLevel()
 		
 		var makeStructure=function(parent){
