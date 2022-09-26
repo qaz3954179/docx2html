@@ -205,10 +205,15 @@ export default class Document extends Converter{
 						if(styles[selector])
 							return styles[selector]
 						var rules=stylesheet.cssRules,len=rules.length
-						stylesheet.insertRule(selector.split(',').map(function(a){
-								return a.trim()[0]=='#' ? a : '#'+this.id+' '+a
-							}.bind(this)).join(',')+'{}',len)
-						return  styles[selector]=stylesheet.cssRules[len].style
+						try {
+							stylesheet.insertRule(selector.split(',').map(function(a){
+									return a.trim()[0]=='#' ? a : '#'+this.id+' '+a
+								}.bind(this)).join(',')+'{}',len)
+							return  styles[selector]=stylesheet.cssRules[len].style
+						} catch (e) {
+							console.log(selector + '解析失败');
+							return styles[selector]=""
+						}
 					},
 					stylePath(a, parent){
 						if(parent)
