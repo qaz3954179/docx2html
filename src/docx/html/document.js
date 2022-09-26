@@ -209,11 +209,13 @@ export default class Document extends Converter{
 							stylesheet.insertRule(selector.split(',').map(function(a){
 									return a.trim()[0]=='#' ? a : '#'+this.id+' '+a
 								}.bind(this)).join(',')+'{}',len)
-							return  styles[selector]=stylesheet.cssRules[len].style
 						} catch (e) {
+							stylesheet.insertRule(selector.split(',').map(function(a){
+									return a.trim()[0]=='#' ? a : '#'+this.id+' '+ '.ab' + a.slice(1)
+								}.bind(this)).join(',')+'{}',len)
 							console.log(selector + '解析失败');
-							return styles[selector]=""
 						}
+							return  styles[selector]=stylesheet.cssRules[len].style
 					},
 					stylePath(a, parent){
 						if(parent)
